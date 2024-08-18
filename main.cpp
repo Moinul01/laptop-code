@@ -1,106 +1,60 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-char s[10] ;
-int MAXSIZE = 10;
+  struct node {
+    int data;
+    struct node*left;
+    struct node* right;
 
-int top = -1;
-int isempty()
-{
+  };
 
-    if(top == -1)
-        return 1;
-    else
-        return 0;
-}
+  struct node* newNode(int data){
+   struct node* node = (struct node*)malloc(sizeof(struct node));
+   node->data = data;
+   node->left = NULL;
+   node-> right  = NULL;
+   return (node);
+  }
+  struct node* insert (struct node* node,int data){
+   if(node==NULL){
+    return (newNode(data));
+   }
+   else
+    if(data<= node->data)
+        node->left = insert(node->left,data);
+    else{
+        node->right = insert(node->right,data);
 
-int isfull()
-{
-
-    if(top == MAXSIZE)
-        return 1;
-    else
-        return 0;
-}
-
-int peek()
-{
-    return s[top];
-}
-
-char pop()
-{
-    char data;
-
-    if(!isempty())
-    {
-        data = s[top];
-        top = top - 1;
-        return data;
     }
-    else
-    {
-        cout<<"Stack is empty.\n";
-    }
-}
 
-char push(char data)
-{
-
-    if(!isfull())
-    {
-        top = top + 1;
-        s[top] = data;
-    }
-    else
-    {
-        cout<<"Stack is full.\n";
-    }
-}
+  }
+  void inorder(struct node* node,vector<int>& sortedInorder){
+  if(node==NULL)
+    return;
+  inorder(node->left,sortedInorder);
+  sortedInorder.push_back(node->data);
+  inorder(node->right,sortedInorder);
+  }
 
 int main()
 {
-    string st;
-    char c;
-    int a=0,b=0;
-    cin>>st;
-    if((st.size())>10)
-    {
-        cout<<"-----Error-----";
-    }
-    else
-    {
-        for(int i=0; i<st.size(); i++)
-        {
-            push(st[i]);
-        }
+   struct node* root = NULL;
+   root = insert(root,4);
+    insert(root, 2);
+    insert(root, 1);
+    insert(root, 3);
+    insert(root, 6);
+    insert(root, 4);
+    insert(root, 5);
 
+    vector<int> sortedInorder;
+    inorder(
+        root,
+        sortedInorder); // calling the recursive function
+    // values of all nodes will appear in sorted order in
+    // the vector sortedInorder
+    // Function call
 
-        for(int i=0; i<st.size(); i++)
-        {
-            c=pop();
-            if(c=='('||c=='{'||c=='[')
-            {
-                a++;
-            }
-            if(c==')'||c=='}'||c==']')
-            {
-                b++;
-            }
-
-        }
-        if(a==b)
-        {
-            cout<<"Opening and Closing parentheses matched";
-        }
-
-        else if(a>b)
-        {
-            cout<<"Opening parentheses not end";
-        }
-        else
-        {
-            cout<<"Closing parentheses not matched";
-        }
-    }
-
+          cout<< sortedInorder[0];
+    return 0;
 }
