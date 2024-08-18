@@ -1,7 +1,5 @@
 /*program name:Calendar application*/
-/*programmers name:Tasnova Haque Mazumder(ID 2021-3-60-235)
-                   Tawhidur Rahman(ID 2021-3-60-233)
-                   Moinul Islam(ID 2021-3-60-241)*/
+/*programmer name:Moinul Islam(ID 2021-3-60-241)*/
 /*Date:22/1/2022*/
 
 
